@@ -16,8 +16,9 @@
     </properties>
 
     <modules>
-        <module>data</module>
+        <module>common</module>
         <module>web</module>
+        <module>api</module>
     </modules>
 
     <dependencyManagement>
