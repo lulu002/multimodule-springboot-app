@@ -13,6 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <springBootVersion>1.4.4.RELEASE</springBootVersion>
     </properties>
 
     <modules>
@@ -26,7 +27,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>1.4.4.RELEASE</version>
+                <version>${springBootVersion}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
