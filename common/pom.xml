@@ -42,12 +42,6 @@
 
         </dependency>
 		
-		<dependency>
-			<groupId>com.javatab</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -74,8 +68,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.37</version>
-        </dependency>
+            </dependency>
 
         <dependency>
             <groupId>org.mybatis</groupId>
