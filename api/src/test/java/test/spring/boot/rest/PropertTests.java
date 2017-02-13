@@ -23,21 +23,17 @@ import project.rest.api.demo.main.DemoRestApplication;
 @SpringApplicationConfiguration(DemoRestApplication.class)
 @WebIntegrationTest(randomPort = false)
 @DirtiesContext
-public class propertTests {
+public class PropertTests {
 
-	String url = "http://localhost:8012/ping";
 	@Value("${str.name}")
 	private String myname;
 
-	private Logger logger = LoggerFactory.getLogger(propertTests.class);
+	private Logger logger = LoggerFactory.getLogger(PropertTests.class);
 
 	@Test
-	public void testPing() throws Exception {
-		logger.info(myname+"haahahahahaha");
-		logger.info(ConfigUtil.strname+"--------------");
+	public void getConfigValue() throws Exception {
+		logger.info(myname + "haahahahahaha");
+		logger.info(ConfigUtil.strname + "--------------");
 	}
 
-	@Test
-	public void testCompression() throws Exception {
-	}
 }
