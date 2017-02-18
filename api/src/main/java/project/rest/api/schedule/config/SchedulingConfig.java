@@ -8,9 +8,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import project.rest.api.demo.config.ConfigUtil;
 
-
 /**
  * 定时任务配置类
+ * 
  * @author minjianying
  *
  */

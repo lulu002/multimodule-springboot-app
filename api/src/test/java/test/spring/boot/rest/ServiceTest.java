@@ -12,8 +12,6 @@ import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.alibaba.druid.support.json.JSONUtils;
-
 import project.common.model.DataResult;
 import project.rest.api.demo.domain.UserData;
 import project.rest.api.demo.main.DemoRestApplication;
@@ -40,7 +38,7 @@ public class ServiceTest {
 	public void fun1() throws Exception {
 		DataResult<List<UserData>> result= userService.getAllUser();
 		System.out.println("打印出来1："+result.getErrorCode());
-		//JSONUtils.toJSONString(result);
+		//JSONUtils.toJSONString(result);o
 		
 		logger.info("打印出来："+result.getErrorCode());
 		logger.info("打印出来："+result.getErrorCode());

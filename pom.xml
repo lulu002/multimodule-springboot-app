@@ -27,6 +27,7 @@
 		<module>common</module>
 		<module>web</module>
 		<module>api</module>
+		<module>eureka-server</module>
 	</modules>
 
 	<dependencies>
