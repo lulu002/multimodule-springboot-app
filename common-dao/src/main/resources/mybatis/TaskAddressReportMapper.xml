@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dituibaobao.dao.mapper.TaskAddressReportMapper" >
+  <resultMap id="BaseResultMap" type="com.dituibaobao.dao.model.TaskAddressReport" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="task_id" property="taskId" jdbcType="INTEGER" />
+    <result column="by_monitor_user_id" property="byMonitorUserId" jdbcType="INTEGER" />
+    <result column="positive_pic" property="positivePic" jdbcType="VARCHAR" />
+    <result column="side_pic" property="sidePic" jdbcType="VARCHAR" />
+    <result column="train_video" property="trainVideo" jdbcType="VARCHAR" />
+    <result column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="open_to_cp" property="openToCp" jdbcType="CHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, task_id, by_monitor_user_id, positive_pic, side_pic, train_video, report_date, 
+    detail_address, longitude, latitude, status, open_to_cp, created_at, updated_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dituibaobao.dao.model.TaskAddressReportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from task_address_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_address_report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task_address_report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dituibaobao.dao.model.TaskAddressReportExample" >
+    delete from task_address_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dituibaobao.dao.model.TaskAddressReport" >
+    insert into task_address_report (id, task_id, by_monitor_user_id, 
+      positive_pic, side_pic, train_video, 
+      report_date, detail_address, longitude, 
+      latitude, status, open_to_cp, 
+      created_at, updated_at)
+    values (#{id,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{byMonitorUserId,jdbcType=INTEGER}, 
+      #{positivePic,jdbcType=VARCHAR}, #{sidePic,jdbcType=VARCHAR}, #{trainVideo,jdbcType=VARCHAR}, 
+      #{reportDate,jdbcType=DATE}, #{detailAddress,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{openToCp,jdbcType=CHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dituibaobao.dao.model.TaskAddressReport" >
+    insert into task_address_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="byMonitorUserId != null" >
+        by_monitor_user_id,
+      </if>
+      <if test="positivePic != null" >
+        positive_pic,
+      </if>
+      <if test="sidePic != null" >
+        side_pic,
+      </if>
+      <if test="trainVideo != null" >
+        train_video,
+      </if>
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="detailAddress != null" >
+        detail_address,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="openToCp != null" >
+        open_to_cp,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="byMonitorUserId != null" >
+        #{byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="positivePic != null" >
+        #{positivePic,jdbcType=VARCHAR},
+      </if>
+      <if test="sidePic != null" >
+        #{sidePic,jdbcType=VARCHAR},
+      </if>
+      <if test="trainVideo != null" >
+        #{trainVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="detailAddress != null" >
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="openToCp != null" >
+        #{openToCp,jdbcType=CHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dituibaobao.dao.model.TaskAddressReportExample" resultType="java.lang.Integer" >
+    select count(*) from task_address_report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task_address_report
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.byMonitorUserId != null" >
+        by_monitor_user_id = #{record.byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.positivePic != null" >
+        positive_pic = #{record.positivePic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sidePic != null" >
+        side_pic = #{record.sidePic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trainVideo != null" >
+        train_video = #{record.trainVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportDate != null" >
+        report_date = #{record.reportDate,jdbcType=DATE},
+      </if>
+      <if test="record.detailAddress != null" >
+        detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        longitude = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null" >
+        latitude = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.openToCp != null" >
+        open_to_cp = #{record.openToCp,jdbcType=CHAR},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task_address_report
+    set id = #{record.id,jdbcType=INTEGER},
+      task_id = #{record.taskId,jdbcType=INTEGER},
+      by_monitor_user_id = #{record.byMonitorUserId,jdbcType=INTEGER},
+      positive_pic = #{record.positivePic,jdbcType=VARCHAR},
+      side_pic = #{record.sidePic,jdbcType=VARCHAR},
+      train_video = #{record.trainVideo,jdbcType=VARCHAR},
+      report_date = #{record.reportDate,jdbcType=DATE},
+      detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=VARCHAR},
+      latitude = #{record.latitude,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      open_to_cp = #{record.openToCp,jdbcType=CHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dituibaobao.dao.model.TaskAddressReport" >
+    update task_address_report
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="byMonitorUserId != null" >
+        by_monitor_user_id = #{byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="positivePic != null" >
+        positive_pic = #{positivePic,jdbcType=VARCHAR},
+      </if>
+      <if test="sidePic != null" >
+        side_pic = #{sidePic,jdbcType=VARCHAR},
+      </if>
+      <if test="trainVideo != null" >
+        train_video = #{trainVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null" >
+        report_date = #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="detailAddress != null" >
+        detail_address = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="openToCp != null" >
+        open_to_cp = #{openToCp,jdbcType=CHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dituibaobao.dao.model.TaskAddressReport" >
+    update task_address_report
+    set task_id = #{taskId,jdbcType=INTEGER},
+      by_monitor_user_id = #{byMonitorUserId,jdbcType=INTEGER},
+      positive_pic = #{positivePic,jdbcType=VARCHAR},
+      side_pic = #{sidePic,jdbcType=VARCHAR},
+      train_video = #{trainVideo,jdbcType=VARCHAR},
+      report_date = #{reportDate,jdbcType=DATE},
+      detail_address = #{detailAddress,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      open_to_cp = #{openToCp,jdbcType=CHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

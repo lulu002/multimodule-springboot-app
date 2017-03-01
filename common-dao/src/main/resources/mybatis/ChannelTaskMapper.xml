@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dituibaobao.dao.mapper.ChannelTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.dituibaobao.dao.model.ChannelTask" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="channel_user_id" property="channelUserId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="task_code" property="taskCode" jdbcType="INTEGER" />
+    <result column="task_type" property="taskType" jdbcType="CHAR" />
+    <result column="task_url" property="taskUrl" jdbcType="VARCHAR" />
+    <result column="task_qr_url" property="taskQrUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="thirdparty_channel_id" property="thirdpartyChannelId" jdbcType="INTEGER" />
+    <result column="thirdparty_channel_name" property="thirdpartyChannelName" jdbcType="VARCHAR" />
+    <result column="thirdparty_channel_phone" property="thirdpartyChannelPhone" jdbcType="VARCHAR" />
+    <result column="task_pointapply_id" property="taskPointapplyId" jdbcType="INTEGER" />
+    <result column="task_start_time" property="taskStartTime" jdbcType="TIMESTAMP" />
+    <result column="origin_task_name" property="originTaskName" jdbcType="VARCHAR" />
+    <result column="origin_task_id" property="originTaskId" jdbcType="INTEGER" />
+    <result column="task_begin_date" property="taskBeginDate" jdbcType="TIMESTAMP" />
+    <result column="task_end_date" property="taskEndDate" jdbcType="TIMESTAMP" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, channel_user_id, title, task_code, task_type, task_url, task_qr_url, status, 
+    thirdparty_channel_id, thirdparty_channel_name, thirdparty_channel_phone, task_pointapply_id, 
+    task_start_time, origin_task_name, origin_task_id, task_begin_date, task_end_date, 
+    created_at, updated_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dituibaobao.dao.model.ChannelTaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from channel_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from channel_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from channel_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dituibaobao.dao.model.ChannelTaskExample" >
+    delete from channel_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dituibaobao.dao.model.ChannelTask" >
+    insert into channel_task (id, channel_user_id, title, 
+      task_code, task_type, task_url, 
+      task_qr_url, status, thirdparty_channel_id, 
+      thirdparty_channel_name, thirdparty_channel_phone, 
+      task_pointapply_id, task_start_time, origin_task_name, 
+      origin_task_id, task_begin_date, task_end_date, 
+      created_at, updated_at)
+    values (#{id,jdbcType=INTEGER}, #{channelUserId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{taskCode,jdbcType=INTEGER}, #{taskType,jdbcType=CHAR}, #{taskUrl,jdbcType=VARCHAR}, 
+      #{taskQrUrl,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{thirdpartyChannelId,jdbcType=INTEGER}, 
+      #{thirdpartyChannelName,jdbcType=VARCHAR}, #{thirdpartyChannelPhone,jdbcType=VARCHAR}, 
+      #{taskPointapplyId,jdbcType=INTEGER}, #{taskStartTime,jdbcType=TIMESTAMP}, #{originTaskName,jdbcType=VARCHAR}, 
+      #{originTaskId,jdbcType=INTEGER}, #{taskBeginDate,jdbcType=TIMESTAMP}, #{taskEndDate,jdbcType=TIMESTAMP}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dituibaobao.dao.model.ChannelTask" >
+    insert into channel_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelUserId != null" >
+        channel_user_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="taskCode != null" >
+        task_code,
+      </if>
+      <if test="taskType != null" >
+        task_type,
+      </if>
+      <if test="taskUrl != null" >
+        task_url,
+      </if>
+      <if test="taskQrUrl != null" >
+        task_qr_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="thirdpartyChannelId != null" >
+        thirdparty_channel_id,
+      </if>
+      <if test="thirdpartyChannelName != null" >
+        thirdparty_channel_name,
+      </if>
+      <if test="thirdpartyChannelPhone != null" >
+        thirdparty_channel_phone,
+      </if>
+      <if test="taskPointapplyId != null" >
+        task_pointapply_id,
+      </if>
+      <if test="taskStartTime != null" >
+        task_start_time,
+      </if>
+      <if test="originTaskName != null" >
+        origin_task_name,
+      </if>
+      <if test="originTaskId != null" >
+        origin_task_id,
+      </if>
+      <if test="taskBeginDate != null" >
+        task_begin_date,
+      </if>
+      <if test="taskEndDate != null" >
+        task_end_date,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="channelUserId != null" >
+        #{channelUserId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null" >
+        #{taskCode,jdbcType=INTEGER},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=CHAR},
+      </if>
+      <if test="taskUrl != null" >
+        #{taskUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="taskQrUrl != null" >
+        #{taskQrUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="thirdpartyChannelId != null" >
+        #{thirdpartyChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="thirdpartyChannelName != null" >
+        #{thirdpartyChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdpartyChannelPhone != null" >
+        #{thirdpartyChannelPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPointapplyId != null" >
+        #{taskPointapplyId,jdbcType=INTEGER},
+      </if>
+      <if test="taskStartTime != null" >
+        #{taskStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originTaskName != null" >
+        #{originTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="originTaskId != null" >
+        #{originTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskBeginDate != null" >
+        #{taskBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskEndDate != null" >
+        #{taskEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dituibaobao.dao.model.ChannelTaskExample" resultType="java.lang.Integer" >
+    select count(*) from channel_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update channel_task
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelUserId != null" >
+        channel_user_id = #{record.channelUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskCode != null" >
+        task_code = #{record.taskCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskType != null" >
+        task_type = #{record.taskType,jdbcType=CHAR},
+      </if>
+      <if test="record.taskUrl != null" >
+        task_url = #{record.taskUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskQrUrl != null" >
+        task_qr_url = #{record.taskQrUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.thirdpartyChannelId != null" >
+        thirdparty_channel_id = #{record.thirdpartyChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.thirdpartyChannelName != null" >
+        thirdparty_channel_name = #{record.thirdpartyChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdpartyChannelPhone != null" >
+        thirdparty_channel_phone = #{record.thirdpartyChannelPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskPointapplyId != null" >
+        task_pointapply_id = #{record.taskPointapplyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskStartTime != null" >
+        task_start_time = #{record.taskStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.originTaskName != null" >
+        origin_task_name = #{record.originTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originTaskId != null" >
+        origin_task_id = #{record.originTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskBeginDate != null" >
+        task_begin_date = #{record.taskBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskEndDate != null" >
+        task_end_date = #{record.taskEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update channel_task
+    set id = #{record.id,jdbcType=INTEGER},
+      channel_user_id = #{record.channelUserId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      task_code = #{record.taskCode,jdbcType=INTEGER},
+      task_type = #{record.taskType,jdbcType=CHAR},
+      task_url = #{record.taskUrl,jdbcType=VARCHAR},
+      task_qr_url = #{record.taskQrUrl,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      thirdparty_channel_id = #{record.thirdpartyChannelId,jdbcType=INTEGER},
+      thirdparty_channel_name = #{record.thirdpartyChannelName,jdbcType=VARCHAR},
+      thirdparty_channel_phone = #{record.thirdpartyChannelPhone,jdbcType=VARCHAR},
+      task_pointapply_id = #{record.taskPointapplyId,jdbcType=INTEGER},
+      task_start_time = #{record.taskStartTime,jdbcType=TIMESTAMP},
+      origin_task_name = #{record.originTaskName,jdbcType=VARCHAR},
+      origin_task_id = #{record.originTaskId,jdbcType=INTEGER},
+      task_begin_date = #{record.taskBeginDate,jdbcType=TIMESTAMP},
+      task_end_date = #{record.taskEndDate,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dituibaobao.dao.model.ChannelTask" >
+    update channel_task
+    <set >
+      <if test="channelUserId != null" >
+        channel_user_id = #{channelUserId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCode != null" >
+        task_code = #{taskCode,jdbcType=INTEGER},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType,jdbcType=CHAR},
+      </if>
+      <if test="taskUrl != null" >
+        task_url = #{taskUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="taskQrUrl != null" >
+        task_qr_url = #{taskQrUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="thirdpartyChannelId != null" >
+        thirdparty_channel_id = #{thirdpartyChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="thirdpartyChannelName != null" >
+        thirdparty_channel_name = #{thirdpartyChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdpartyChannelPhone != null" >
+        thirdparty_channel_phone = #{thirdpartyChannelPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPointapplyId != null" >
+        task_pointapply_id = #{taskPointapplyId,jdbcType=INTEGER},
+      </if>
+      <if test="taskStartTime != null" >
+        task_start_time = #{taskStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="originTaskName != null" >
+        origin_task_name = #{originTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="originTaskId != null" >
+        origin_task_id = #{originTaskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskBeginDate != null" >
+        task_begin_date = #{taskBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskEndDate != null" >
+        task_end_date = #{taskEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dituibaobao.dao.model.ChannelTask" >
+    update channel_task
+    set channel_user_id = #{channelUserId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      task_code = #{taskCode,jdbcType=INTEGER},
+      task_type = #{taskType,jdbcType=CHAR},
+      task_url = #{taskUrl,jdbcType=VARCHAR},
+      task_qr_url = #{taskQrUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      thirdparty_channel_id = #{thirdpartyChannelId,jdbcType=INTEGER},
+      thirdparty_channel_name = #{thirdpartyChannelName,jdbcType=VARCHAR},
+      thirdparty_channel_phone = #{thirdpartyChannelPhone,jdbcType=VARCHAR},
+      task_pointapply_id = #{taskPointapplyId,jdbcType=INTEGER},
+      task_start_time = #{taskStartTime,jdbcType=TIMESTAMP},
+      origin_task_name = #{originTaskName,jdbcType=VARCHAR},
+      origin_task_id = #{originTaskId,jdbcType=INTEGER},
+      task_begin_date = #{taskBeginDate,jdbcType=TIMESTAMP},
+      task_end_date = #{taskEndDate,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

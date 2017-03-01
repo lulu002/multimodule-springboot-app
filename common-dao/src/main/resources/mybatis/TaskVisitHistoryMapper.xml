@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dituibaobao.dao.mapper.TaskVisitHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.dituibaobao.dao.model.TaskVisitHistory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="task_id" property="taskId" jdbcType="INTEGER" />
+    <result column="by_monitor_user_id" property="byMonitorUserId" jdbcType="INTEGER" />
+    <result column="user_agent_id" property="userAgentId" jdbcType="INTEGER" />
+    <result column="visitor_ip" property="visitorIp" jdbcType="VARCHAR" />
+    <result column="ip_city" property="ipCity" jdbcType="VARCHAR" />
+    <result column="ip_province" property="ipProvince" jdbcType="VARCHAR" />
+    <result column="web_longitude" property="webLongitude" jdbcType="VARCHAR" />
+    <result column="web_latitude" property="webLatitude" jdbcType="VARCHAR" />
+    <result column="web_province" property="webProvince" jdbcType="VARCHAR" />
+    <result column="web_city" property="webCity" jdbcType="VARCHAR" />
+    <result column="visitor_browser" property="visitorBrowser" jdbcType="VARCHAR" />
+    <result column="visitor_os" property="visitorOs" jdbcType="VARCHAR" />
+    <result column="uv_cookie_value" property="uvCookieValue" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, task_id, by_monitor_user_id, user_agent_id, visitor_ip, ip_city, ip_province, 
+    web_longitude, web_latitude, web_province, web_city, visitor_browser, visitor_os, 
+    uv_cookie_value, status, created_at, updated_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dituibaobao.dao.model.TaskVisitHistoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from task_visit_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_visit_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task_visit_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dituibaobao.dao.model.TaskVisitHistoryExample" >
+    delete from task_visit_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dituibaobao.dao.model.TaskVisitHistory" useGeneratedKeys="true" keyProperty="id">
+    insert into task_visit_history (id, task_id, by_monitor_user_id, 
+      user_agent_id, visitor_ip, ip_city, 
+      ip_province, web_longitude, web_latitude, 
+      web_province, web_city, visitor_browser, 
+      visitor_os, uv_cookie_value, status, 
+      created_at, updated_at)
+    values (#{id,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, #{byMonitorUserId,jdbcType=INTEGER}, 
+      #{userAgentId,jdbcType=INTEGER}, #{visitorIp,jdbcType=VARCHAR}, #{ipCity,jdbcType=VARCHAR}, 
+      #{ipProvince,jdbcType=VARCHAR}, #{webLongitude,jdbcType=VARCHAR}, #{webLatitude,jdbcType=VARCHAR}, 
+      #{webProvince,jdbcType=VARCHAR}, #{webCity,jdbcType=VARCHAR}, #{visitorBrowser,jdbcType=VARCHAR}, 
+      #{visitorOs,jdbcType=VARCHAR}, #{uvCookieValue,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dituibaobao.dao.model.TaskVisitHistory" useGeneratedKeys="true" keyProperty="id">
+    insert into task_visit_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="byMonitorUserId != null" >
+        by_monitor_user_id,
+      </if>
+      <if test="userAgentId != null" >
+        user_agent_id,
+      </if>
+      <if test="visitorIp != null" >
+        visitor_ip,
+      </if>
+      <if test="ipCity != null" >
+        ip_city,
+      </if>
+      <if test="ipProvince != null" >
+        ip_province,
+      </if>
+      <if test="webLongitude != null" >
+        web_longitude,
+      </if>
+      <if test="webLatitude != null" >
+        web_latitude,
+      </if>
+      <if test="webProvince != null" >
+        web_province,
+      </if>
+      <if test="webCity != null" >
+        web_city,
+      </if>
+      <if test="visitorBrowser != null" >
+        visitor_browser,
+      </if>
+      <if test="visitorOs != null" >
+        visitor_os,
+      </if>
+      <if test="uvCookieValue != null" >
+        uv_cookie_value,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="byMonitorUserId != null" >
+        #{byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="userAgentId != null" >
+        #{userAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="visitorIp != null" >
+        #{visitorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="ipCity != null" >
+        #{ipCity,jdbcType=VARCHAR},
+      </if>
+      <if test="ipProvince != null" >
+        #{ipProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="webLongitude != null" >
+        #{webLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="webLatitude != null" >
+        #{webLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="webProvince != null" >
+        #{webProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="webCity != null" >
+        #{webCity,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorBrowser != null" >
+        #{visitorBrowser,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorOs != null" >
+        #{visitorOs,jdbcType=VARCHAR},
+      </if>
+      <if test="uvCookieValue != null" >
+        #{uvCookieValue,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dituibaobao.dao.model.TaskVisitHistoryExample" resultType="java.lang.Integer" >
+    select count(*) from task_visit_history
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task_visit_history
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.byMonitorUserId != null" >
+        by_monitor_user_id = #{record.byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAgentId != null" >
+        user_agent_id = #{record.userAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.visitorIp != null" >
+        visitor_ip = #{record.visitorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipCity != null" >
+        ip_city = #{record.ipCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipProvince != null" >
+        ip_province = #{record.ipProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webLongitude != null" >
+        web_longitude = #{record.webLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webLatitude != null" >
+        web_latitude = #{record.webLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webProvince != null" >
+        web_province = #{record.webProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webCity != null" >
+        web_city = #{record.webCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorBrowser != null" >
+        visitor_browser = #{record.visitorBrowser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitorOs != null" >
+        visitor_os = #{record.visitorOs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uvCookieValue != null" >
+        uv_cookie_value = #{record.uvCookieValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task_visit_history
+    set id = #{record.id,jdbcType=INTEGER},
+      task_id = #{record.taskId,jdbcType=INTEGER},
+      by_monitor_user_id = #{record.byMonitorUserId,jdbcType=INTEGER},
+      user_agent_id = #{record.userAgentId,jdbcType=INTEGER},
+      visitor_ip = #{record.visitorIp,jdbcType=VARCHAR},
+      ip_city = #{record.ipCity,jdbcType=VARCHAR},
+      ip_province = #{record.ipProvince,jdbcType=VARCHAR},
+      web_longitude = #{record.webLongitude,jdbcType=VARCHAR},
+      web_latitude = #{record.webLatitude,jdbcType=VARCHAR},
+      web_province = #{record.webProvince,jdbcType=VARCHAR},
+      web_city = #{record.webCity,jdbcType=VARCHAR},
+      visitor_browser = #{record.visitorBrowser,jdbcType=VARCHAR},
+      visitor_os = #{record.visitorOs,jdbcType=VARCHAR},
+      uv_cookie_value = #{record.uvCookieValue,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dituibaobao.dao.model.TaskVisitHistory" >
+    update task_visit_history
+    <set >
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="byMonitorUserId != null" >
+        by_monitor_user_id = #{byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="userAgentId != null" >
+        user_agent_id = #{userAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="visitorIp != null" >
+        visitor_ip = #{visitorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="ipCity != null" >
+        ip_city = #{ipCity,jdbcType=VARCHAR},
+      </if>
+      <if test="ipProvince != null" >
+        ip_province = #{ipProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="webLongitude != null" >
+        web_longitude = #{webLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="webLatitude != null" >
+        web_latitude = #{webLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="webProvince != null" >
+        web_province = #{webProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="webCity != null" >
+        web_city = #{webCity,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorBrowser != null" >
+        visitor_browser = #{visitorBrowser,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorOs != null" >
+        visitor_os = #{visitorOs,jdbcType=VARCHAR},
+      </if>
+      <if test="uvCookieValue != null" >
+        uv_cookie_value = #{uvCookieValue,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dituibaobao.dao.model.TaskVisitHistory" >
+    update task_visit_history
+    set task_id = #{taskId,jdbcType=INTEGER},
+      by_monitor_user_id = #{byMonitorUserId,jdbcType=INTEGER},
+      user_agent_id = #{userAgentId,jdbcType=INTEGER},
+      visitor_ip = #{visitorIp,jdbcType=VARCHAR},
+      ip_city = #{ipCity,jdbcType=VARCHAR},
+      ip_province = #{ipProvince,jdbcType=VARCHAR},
+      web_longitude = #{webLongitude,jdbcType=VARCHAR},
+      web_latitude = #{webLatitude,jdbcType=VARCHAR},
+      web_province = #{webProvince,jdbcType=VARCHAR},
+      web_city = #{webCity,jdbcType=VARCHAR},
+      visitor_browser = #{visitorBrowser,jdbcType=VARCHAR},
+      visitor_os = #{visitorOs,jdbcType=VARCHAR},
+      uv_cookie_value = #{uvCookieValue,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+	<select id="findPvCountByTaskIds" resultType="java.util.HashMap">
+		SELECT task_id,COUNT(1) vistCount FROM task_visit_history
+		<where>
+			task_id in
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY task_id
+	</select>
+	
+	<select id="findUvCountByTaskIds" resultType="java.util.HashMap">
+		SELECT task_id, count(DISTINCT uv_cookie_value) as vistCount FROM task_visit_history 
+		<where>
+			uv_cookie_value != '' AND task_id in
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY task_id
+	</select>
+	
+	<select id="findPvCountByTaskIdsByDate" resultType="java.util.HashMap">
+		SELECT DATE_FORMAT(created_at,'%Y%m%d') as scanDate,COUNT(1) vistCount FROM task_visit_history
+		<where>
+			  <![CDATA[ created_at >= #{beginDate} ]]> AND task_id in 
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY DATE_FORMAT(created_at,'%Y%m%d')
+	</select>
+	
+	<select id="findUvCountByTaskIdsByDate" resultType="java.util.HashMap">
+		SELECT DATE_FORMAT(created_at,'%Y%m%d') as scanDate, count(DISTINCT uv_cookie_value) as vistCount FROM task_visit_history 
+		<where>
+			uv_cookie_value != '' AND  <![CDATA[ created_at >= #{beginDate} ]]> AND  task_id in
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY DATE_FORMAT(created_at,'%Y%m%d')
+	</select>
+
+	<select id="findPvCountByTaskIdsByHour" resultType="java.util.HashMap">
+		SELECT DATE_FORMAT(created_at,'%H') as scanDate,COUNT(1)
+		vistCount FROM task_visit_history
+		<where>
+			  <![CDATA[ created_at >= #{beginDate} and created_at <=#{endDate} ]]>
+			AND task_id in
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY DATE_FORMAT(created_at,'%H') ORDER BY created_at
+	</select>
+
+	<select id="findUvCountByTaskIdsByHour" resultType="java.util.HashMap">
+		SELECT DATE_FORMAT(created_at,'%H') as scanDate, count(DISTINCT
+		uv_cookie_value) as vistCount FROM task_visit_history
+		<where>
+			uv_cookie_value != '' AND  <![CDATA[ created_at >= #{beginDate}  and created_at <=#{endDate} ]]>
+			AND task_id in
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY DATE_FORMAT(created_at,'%H') ORDER BY created_at
+	</select>
+	
+	<select id="findPhoneCountByTaskIdsByDate" resultType="java.util.HashMap">
+		SELECT DATE_FORMAT(created_at,'%Y%m%d') as scanDate,COUNT(1) vistCount FROM task_collect_phone
+		<where>
+			  <![CDATA[ created_at >= #{beginDate} ]]> AND status='valid' AND task_id in 
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY DATE_FORMAT(created_at,'%Y%m%d')
+	</select>
+	
+		<select id="findPhoneCountByTaskIdsByHour" resultType="java.util.HashMap">
+		SELECT DATE_FORMAT(created_at,'%H') as scanDate,COUNT(1)
+		vistCount FROM task_collect_phone
+		<where>
+			  <![CDATA[ created_at >= #{beginDate} and created_at <=#{endDate} AND status='valid'  ]]>
+			AND task_id in
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY DATE_FORMAT(created_at,'%H') ORDER BY created_at
+	</select>
+	
+		
+	<select id="findGoodPhoneCountByTaskIdsByDate" resultType="java.util.HashMap">
+		SELECT DATE_FORMAT(created_at,'%Y%m%d') as scanDate,GROUP_CONCAT(phone) vistCount FROM task_collect_phone
+		<where>
+			  <![CDATA[ created_at >= #{beginDate} ]]> AND status='valid' AND task_id in 
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY DATE_FORMAT(created_at,'%Y%m%d')
+	</select>
+	
+	<select id="findGoodPhoneCountByTaskIdsByHour" resultType="java.util.HashMap">
+		SELECT DATE_FORMAT(created_at,'%H') as scanDate,GROUP_CONCAT(phone)
+		vistCount FROM task_collect_phone
+		<where>
+			  <![CDATA[ created_at >= #{beginDate} and created_at <=#{endDate} AND status='valid'  ]]>
+			AND task_id in
+			<foreach collection="ids" item="item" index="index" open="("
+				separator="," close=")">#{item}</foreach>
+		</where>
+		GROUP BY DATE_FORMAT(created_at,'%H') ORDER BY created_at
+	</select>
+</mapper>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dituibaobao.dao.mapper.ByMonitorUserMapper" >
+  <resultMap id="BaseResultMap" type="com.dituibaobao.dao.model.ByMonitorUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="last_longitude" property="lastLongitude" jdbcType="VARCHAR" />
+    <result column="last_latitude" property="lastLatitude" jdbcType="VARCHAR" />
+    <result column="last_imei" property="lastImei" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="last_scan_at" property="lastScanAt" jdbcType="TIMESTAMP" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, phone, city, last_longitude, last_latitude, last_imei, status, last_scan_at, 
+    created_at, updated_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dituibaobao.dao.model.ByMonitorUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from by_monitor_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from by_monitor_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from by_monitor_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dituibaobao.dao.model.ByMonitorUserExample" >
+    delete from by_monitor_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dituibaobao.dao.model.ByMonitorUser"  useGeneratedKeys="true" keyProperty="id">
+    insert into by_monitor_user (id, phone, city, 
+      last_longitude, last_latitude, last_imei, 
+      status, last_scan_at, created_at, 
+      updated_at)
+    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{lastLongitude,jdbcType=VARCHAR}, #{lastLatitude,jdbcType=VARCHAR}, #{lastImei,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{lastScanAt,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dituibaobao.dao.model.ByMonitorUser"  useGeneratedKeys="true" keyProperty="id">
+    insert into by_monitor_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="lastLongitude != null" >
+        last_longitude,
+      </if>
+      <if test="lastLatitude != null" >
+        last_latitude,
+      </if>
+      <if test="lastImei != null" >
+        last_imei,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastScanAt != null" >
+        last_scan_at,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLongitude != null" >
+        #{lastLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLatitude != null" >
+        #{lastLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="lastImei != null" >
+        #{lastImei,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="lastScanAt != null" >
+        #{lastScanAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dituibaobao.dao.model.ByMonitorUserExample" resultType="java.lang.Integer" >
+    select count(*) from by_monitor_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update by_monitor_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLongitude != null" >
+        last_longitude = #{record.lastLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLatitude != null" >
+        last_latitude = #{record.lastLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastImei != null" >
+        last_imei = #{record.lastImei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.lastScanAt != null" >
+        last_scan_at = #{record.lastScanAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update by_monitor_user
+    set id = #{record.id,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      last_longitude = #{record.lastLongitude,jdbcType=VARCHAR},
+      last_latitude = #{record.lastLatitude,jdbcType=VARCHAR},
+      last_imei = #{record.lastImei,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      last_scan_at = #{record.lastScanAt,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dituibaobao.dao.model.ByMonitorUser" >
+    update by_monitor_user
+    <set >
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLongitude != null" >
+        last_longitude = #{lastLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLatitude != null" >
+        last_latitude = #{lastLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="lastImei != null" >
+        last_imei = #{lastImei,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="lastScanAt != null" >
+        last_scan_at = #{lastScanAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dituibaobao.dao.model.ByMonitorUser" >
+    update by_monitor_user
+    set phone = #{phone,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      last_longitude = #{lastLongitude,jdbcType=VARCHAR},
+      last_latitude = #{lastLatitude,jdbcType=VARCHAR},
+      last_imei = #{lastImei,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      last_scan_at = #{lastScanAt,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dituibaobao.dao.mapper.AppVersionMapper" >
+  <resultMap id="BaseResultMap" type="com.dituibaobao.dao.model.AppVersion" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="os" property="os" jdbcType="CHAR" />
+    <result column="match_expression" property="matchExpression" jdbcType="VARCHAR" />
+    <result column="package_url" property="packageUrl" jdbcType="VARCHAR" />
+    <result column="force_upgrade" property="forceUpgrade" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, os, match_expression, package_url, force_upgrade, remark, status, created_at, 
+    updated_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dituibaobao.dao.model.AppVersionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from app_version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from app_version
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from app_version
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dituibaobao.dao.model.AppVersionExample" >
+    delete from app_version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dituibaobao.dao.model.AppVersion" >
+    insert into app_version (id, os, match_expression, 
+      package_url, force_upgrade, remark, 
+      status, created_at, updated_at
+      )
+    values (#{id,jdbcType=INTEGER}, #{os,jdbcType=CHAR}, #{matchExpression,jdbcType=VARCHAR}, 
+      #{packageUrl,jdbcType=VARCHAR}, #{forceUpgrade,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dituibaobao.dao.model.AppVersion" >
+    insert into app_version
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="os != null" >
+        os,
+      </if>
+      <if test="matchExpression != null" >
+        match_expression,
+      </if>
+      <if test="packageUrl != null" >
+        package_url,
+      </if>
+      <if test="forceUpgrade != null" >
+        force_upgrade,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="os != null" >
+        #{os,jdbcType=CHAR},
+      </if>
+      <if test="matchExpression != null" >
+        #{matchExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="packageUrl != null" >
+        #{packageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="forceUpgrade != null" >
+        #{forceUpgrade,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dituibaobao.dao.model.AppVersionExample" resultType="java.lang.Integer" >
+    select count(*) from app_version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update app_version
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.os != null" >
+        os = #{record.os,jdbcType=CHAR},
+      </if>
+      <if test="record.matchExpression != null" >
+        match_expression = #{record.matchExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageUrl != null" >
+        package_url = #{record.packageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forceUpgrade != null" >
+        force_upgrade = #{record.forceUpgrade,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update app_version
+    set id = #{record.id,jdbcType=INTEGER},
+      os = #{record.os,jdbcType=CHAR},
+      match_expression = #{record.matchExpression,jdbcType=VARCHAR},
+      package_url = #{record.packageUrl,jdbcType=VARCHAR},
+      force_upgrade = #{record.forceUpgrade,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dituibaobao.dao.model.AppVersion" >
+    update app_version
+    <set >
+      <if test="os != null" >
+        os = #{os,jdbcType=CHAR},
+      </if>
+      <if test="matchExpression != null" >
+        match_expression = #{matchExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="packageUrl != null" >
+        package_url = #{packageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="forceUpgrade != null" >
+        force_upgrade = #{forceUpgrade,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dituibaobao.dao.model.AppVersion" >
+    update app_version
+    set os = #{os,jdbcType=CHAR},
+      match_expression = #{matchExpression,jdbcType=VARCHAR},
+      package_url = #{packageUrl,jdbcType=VARCHAR},
+      force_upgrade = #{forceUpgrade,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dituibaobao.dao.mapper.TaskCollectPhoneMapper" >
+  <resultMap id="BaseResultMap" type="com.dituibaobao.dao.model.TaskCollectPhone" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="channel_user_id" property="channelUserId" jdbcType="INTEGER" />
+    <result column="task_id" property="taskId" jdbcType="INTEGER" />
+    <result column="task_code" property="taskCode" jdbcType="INTEGER" />
+    <result column="by_monitor_user_id" property="byMonitorUserId" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="origin_task_name" property="originTaskName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, channel_user_id, task_id, task_code, by_monitor_user_id, phone, origin_task_name, 
+    status, created_at, updated_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dituibaobao.dao.model.TaskCollectPhoneExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from task_collect_phone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_collect_phone
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task_collect_phone
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dituibaobao.dao.model.TaskCollectPhoneExample" >
+    delete from task_collect_phone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dituibaobao.dao.model.TaskCollectPhone" >
+    insert into task_collect_phone (id, channel_user_id, task_id, 
+      task_code, by_monitor_user_id, phone, 
+      origin_task_name, status, created_at, 
+      updated_at)
+    values (#{id,jdbcType=INTEGER}, #{channelUserId,jdbcType=INTEGER}, #{taskId,jdbcType=INTEGER}, 
+      #{taskCode,jdbcType=INTEGER}, #{byMonitorUserId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{originTaskName,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dituibaobao.dao.model.TaskCollectPhone" >
+    insert into task_collect_phone
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="channelUserId != null" >
+        channel_user_id,
+      </if>
+      <if test="taskId != null" >
+        task_id,
+      </if>
+      <if test="taskCode != null" >
+        task_code,
+      </if>
+      <if test="byMonitorUserId != null" >
+        by_monitor_user_id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="originTaskName != null" >
+        origin_task_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="channelUserId != null" >
+        #{channelUserId,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskCode != null" >
+        #{taskCode,jdbcType=INTEGER},
+      </if>
+      <if test="byMonitorUserId != null" >
+        #{byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="originTaskName != null" >
+        #{originTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dituibaobao.dao.model.TaskCollectPhoneExample" resultType="java.lang.Integer" >
+    select count(*) from task_collect_phone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task_collect_phone
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.channelUserId != null" >
+        channel_user_id = #{record.channelUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskId != null" >
+        task_id = #{record.taskId,jdbcType=INTEGER},
+      </if>
+      <if test="record.taskCode != null" >
+        task_code = #{record.taskCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.byMonitorUserId != null" >
+        by_monitor_user_id = #{record.byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originTaskName != null" >
+        origin_task_name = #{record.originTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task_collect_phone
+    set id = #{record.id,jdbcType=INTEGER},
+      channel_user_id = #{record.channelUserId,jdbcType=INTEGER},
+      task_id = #{record.taskId,jdbcType=INTEGER},
+      task_code = #{record.taskCode,jdbcType=INTEGER},
+      by_monitor_user_id = #{record.byMonitorUserId,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      origin_task_name = #{record.originTaskName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dituibaobao.dao.model.TaskCollectPhone" >
+    update task_collect_phone
+    <set >
+      <if test="channelUserId != null" >
+        channel_user_id = #{channelUserId,jdbcType=INTEGER},
+      </if>
+      <if test="taskId != null" >
+        task_id = #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskCode != null" >
+        task_code = #{taskCode,jdbcType=INTEGER},
+      </if>
+      <if test="byMonitorUserId != null" >
+        by_monitor_user_id = #{byMonitorUserId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="originTaskName != null" >
+        origin_task_name = #{originTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dituibaobao.dao.model.TaskCollectPhone" >
+    update task_collect_phone
+    set channel_user_id = #{channelUserId,jdbcType=INTEGER},
+      task_id = #{taskId,jdbcType=INTEGER},
+      task_code = #{taskCode,jdbcType=INTEGER},
+      by_monitor_user_id = #{byMonitorUserId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      origin_task_name = #{originTaskName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+	<select id="selectTaskCollectPhoneBizVO" resultType="com.dituibaobao.dao.model.bizVO.TaskCollectPhoneBizVO" parameterType="java.lang.Integer">
+	SELECT T2.phone as byMonitorPhone,T1.phone as phone,T1.created_at as createdAt FROM task_collect_phone T1,by_monitor_user T2 where
+	T1.task_id=#{taskId,jdbcType=INTEGER} and T1.by_monitor_user_id=T2.id
+	</select>
+ 
+</mapper>
